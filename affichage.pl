@@ -9,11 +9,12 @@ Ensemble de prédicat permettant :
 #############################################################################*/	
 
 :- module(affichage, [displayGrid/1]).
+:- use_module(grille).
 	
 /*============================================================================
 							Afficher Grille
-=============================================================================	
-	- E : element courant de la liste.
+==============================================================================	
+	- Grid : La grille à afficher.
 	- NoElem : Element Courant de la grille
 	- List : List présente à l'indice NoElem de la grille
 =============================================================================*/
@@ -21,18 +22,17 @@ Ensemble de prédicat permettant :
 displayGrid(_,7).										/*On s'arete à 7*/
 displayGrid(Grid, NoElem):- NoElem < 7,
 							Next is NoElem+1,
-							nth1(NoElem,Grid,List),		/*Recuperation de la sous list à l'indice courant*/
-							displayList(List),			/*Afficher sous liste*/
+							getLine(Grid, NoElem,List),	/*Recuperation de la sous list à l'indice courant*/
+							displayList(List),				/*Afficher sous liste*/
 							write('\n'),
 							displayGrid(Grid, Next).
-						
 displayGrid(G):- displayGrid(G,1).
 
 
 
-/*==========================================================================
+/*============================================================================
 						Afficher liste
-=============================================================================	
+==============================================================================	
 	- Element : element courant de la liste
 	- List : liste des element suivant
 =============================================================================*/
@@ -42,11 +42,11 @@ displayList([Element|List]):-  	write('|'),
 								displayList(List).
 
 
-/*====================================================================
+/*============================================================================
 						Afficher element
-=======================================================================	
+==============================================================================	
 	- Element : Element à afficher
-=======================================================================*/
+=============================================================================*/
 
 displayElement([]):- write(' '),!.
 displayElement(Element):- write(Element).
