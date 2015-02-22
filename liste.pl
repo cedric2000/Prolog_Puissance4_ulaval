@@ -8,7 +8,7 @@ Ensemble de prédicat permettant de géré une liste :
 	- Mettre à jour un element dans la liste.
 #############################################################################*/	
 
-:- module(liste, [setElement/4,getElement/3,addElement/3]).
+:- module(liste, [setElement/4,getElement/3,addElement/3,getSize/2]).
 	
 /*============================================================================
 				Ajouter Element fin liste
@@ -18,7 +18,9 @@ Ensemble de prédicat permettant de géré une liste :
 	- NewList : Liste mise à jour.
 =============================================================================*/
 
-addElement(List,Element, NewList) :- append(List,[Element], NewList).
+addElement(List,Element, NewList) 	:- 	getSize(Liste, N), 
+										N<7,
+										append(List,[Element], NewList). 
 
 /*============================================================================
 					Recupéré un element

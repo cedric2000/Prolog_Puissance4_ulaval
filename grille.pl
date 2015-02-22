@@ -11,7 +11,7 @@ Ensemble de prédicat permettant de géré une grille :
 	- Placer un element sur une colonne	(toujours en bas)
 #############################################################################*/	
 
-:- module(grille, [getLine/3,addElementColumn/4]).
+:- module(grille, [getLine/3,getColumn/3,addElementColumn/4]).
 :- use_module(liste).
 
 /*============================================================================

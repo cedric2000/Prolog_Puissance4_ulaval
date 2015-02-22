@@ -6,9 +6,10 @@ Ensemble de prédicat permettant :
 	- Affichage d'en element quelconque dans la console
 	- Affichage d'une liste de N element.
 	- Affichage d'une liste de liste sous la forme d'une grille (ou matrice)
+	- Affichage du choix des joueurs pour le prochain tour.
 #############################################################################*/	
 
-:- module(affichage, [displayGrid/1]).
+:- module(affichage, [displayGrid/1,displayCoupX/1,displayCoupO/1]).
 :- use_module(grille).
 	
 /*============================================================================
@@ -54,3 +55,23 @@ displayList([Element|List]):-  	write('|'),
 
 displayElement([]):- write(' '),!.
 displayElement(Element):- write(Element).
+
+
+/*============================================================================
+					Joueur joue coup 
+==============================================================================	
+	- Grid : La grille à afficher.
+	- NoElem : Element Courant de la grille
+	- List : List présente à l'indice NoElem de la grille
+=============================================================================*/
+
+displayCoupX(Grid):- 	write('\t    Joueur X  | choisir la colonne : '),			
+						read(NoColumn), 
+						jouerCoupX(NoColumn, Grid).
+
+displayCoupO(Grid):- 	write('\t    Joueur O  | choisir la colonne : '),			
+						read(NoColumn), 
+						jouerCoupO(NoColumn, Grid).
+					
+
+					
