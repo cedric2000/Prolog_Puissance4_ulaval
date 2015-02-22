@@ -19,16 +19,20 @@ Ensemble de prédicat permettant :
 	- List : List présente à l'indice NoElem de la grille
 =============================================================================*/
 
-displayGrid(_,7).										/*On s'arete à 7*/
-displayGrid(Grid, NoElem):- NoElem < 7,
-							Next is NoElem+1,
-							getLine(Grid, NoElem,List),	/*Recuperation de la sous list à l'indice courant*/
-							displayList(List),				/*Afficher sous liste*/
-							write('\n'),
+displayGrid(_,0).										/*On s'arete à 0*/
+displayGrid(Grid, NoElem):- NoElem > 0,
+							Next is NoElem-1,
+							getLine(NoElem,Grid,List),	/*Recuperation de la sous list à l'indice courant*/
+							displayList(List),			/*Afficher sous liste*/
+							write('\n\t\t'),
 							displayGrid(Grid, Next).
-displayGrid(G):- displayGrid(G,1).
 
 
+displayGrid(G)	:- 	write('\n\t\t 1 2 3 4 5 6 7'),
+					write('\n\t\t# # # # # # # #'),
+					write('\n\t\t'),
+					displayGrid(G,6),
+					write('###############\n\n').				
 
 /*============================================================================
 						Afficher liste

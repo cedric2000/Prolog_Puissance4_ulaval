@@ -11,8 +11,9 @@ Ensemble de prédicat permettant de géré une grille :
 	- Placer un element sur une colonne	(toujours en bas)
 #############################################################################*/	
 
-:- module(grille, [getLine/3,getColumn/3]).
-	
+:- module(grille, [getLine/3,addElementColumn/4]).
+:- use_module(liste).
+
 /*============================================================================
 					Récupéré une ligne de la grille
 ==============================================================================	
@@ -21,17 +22,19 @@ Ensemble de prédicat permettant de géré une grille :
 	- Line : List composé des elements de la ligne NbLine.
 =============================================================================*/
 
-getLine(Grid, NbLine, Line) :- maplist(nth1(NbLine), Grid, Line).
+getLine(NbLine,Grid,Line) :- maplist(getElement(NbLine), Grid, Line).
 
 /*============================================================================
 						Récupéré une colonne de la grille
 ==============================================================================	
 	- Grid : Grille à mettre à jour.
 	- NbColumn : numéro de la colonne.
+	- Element : Element à ajouter.
 	- Column : List composé des elements de la colonne NbColumn.
 =============================================================================*/
 
-getColumn(Grid, NbColumn, Column) :- nth1(NbColumn,Grid,Column). 
+getColumn(NbColumn,Grid,Column) :- getElement(NbColumn,Grid,Column). 
+	
 	
 /*============================================================================
 				Ajouter Element colone N
@@ -41,6 +44,7 @@ getColumn(Grid, NbColumn, Column) :- nth1(NbColumn,Grid,Column).
 	- NewGrid : Grille mise à jour.
 =============================================================================*/
 
-addElement(Grid,NbColumn, NewGrid) :- .
-
+addElementColumn(Index, Grid, Element, NewGrid) :- getColumn(Index, Grid, Column), 			/* Récupéré la colone choisis */
+											addElement(Column, Element, NewColumn),		/* On ajoute l'element dans la liste colone*/
+											setElement(Index,Grid,NewColumn, NewGrid).	/*On met à jour la grille*/
 
