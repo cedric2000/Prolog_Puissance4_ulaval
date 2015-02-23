@@ -9,7 +9,7 @@ Ensemble de prédicat permettant :
 	- Affichage du choix des joueurs pour le prochain tour.
 #############################################################################*/	
 
-:- module(affichage, [displayGrid/1,displayCoupX/1,displayCoupO/1]).
+:- module(affichage, [displayGrid/1,displayCoupX/1,displayCoupO/1,displayWinner/1]).
 :- use_module(grille).
 	
 /*============================================================================
@@ -58,20 +58,32 @@ displayElement(Element):- write(Element).
 
 
 /*============================================================================
-					Joueur joue coup 
+					Affiche le choix du prochain coup 
 ==============================================================================	
-	- Grid : La grille à afficher.
-	- NoElem : Element Courant de la grille
-	- List : List présente à l'indice NoElem de la grille
+	- Grid : La grille de jeu
 =============================================================================*/
 
+
+displayCoupX(Grid):-	isWinner(Grid,'O'), 
+						displayWinner('O'),!.
+							
 displayCoupX(Grid):- 	write('\t    Joueur X  | choisir la colonne : '),			
 						read(NoColumn), 
 						jouerCoupX(NoColumn, Grid).
 
+						
+displayCoupO(Grid):-	isWinner(Grid,'X'), 
+						displayWinner('X'),!.
+								
 displayCoupO(Grid):- 	write('\t    Joueur O  | choisir la colonne : '),			
 						read(NoColumn), 
 						jouerCoupO(NoColumn, Grid).
-					
 
+/*============================================================================
+						Affiche le gagnant
+==============================================================================	
+	- Joueur : Le joueur qui à gagner.
+=============================================================================*/						
+
+displayWinner(Joueur) :- write('\t        Le Joueur '), write(Joueur), write(' a gagné !!!!').
 					

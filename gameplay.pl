@@ -9,6 +9,7 @@ Ensemble de prédicat permettant :
 :- module(gameplay, [jouerCoupX/2, jouerCoupO/2]).
 :- use_module(grille).
 :- use_module(liste).
+:- use_module(fin_jeu).
 	
 /*============================================================================
 					Joueur X joue coup 
@@ -22,7 +23,7 @@ jouerCoupX(NoColumn,Grid)	:- 	NoColumn > 7,
 								write('\n\t Entrez un numéro de colonne entre 1 et 7\n'),
 								displayCoupX(Grid).
 
-	 /* Cas ou la colonne renseignée est pleine  */				
+	/* Cas ou la colonne renseignée est pleine  */				
 jouerCoupX(NoColumn,Grid)	:-  getColumn(NoColumn,Grid,Column),
 								getSize(Column,N),
 								N>5,
@@ -46,6 +47,8 @@ jouerCoupX(NoColumn,Grid)	:-	getColumn(NoColumn,Grid,Column),
 	- Grid : La grille à mettre à jour.
 	- NoColumn : Numero de la colone à mettre à jour
 =============================================================================
+
+
 
 	 Cas ou la colonne renseignée est en dehors des bornes  */
 jouerCoupO(NoColumn,Grid)	:- 	NoColumn > 7,

@@ -8,7 +8,7 @@ Ensemble de prédicat permettant de géré une liste :
 	- Mettre à jour un element dans la liste.
 #############################################################################*/	
 
-:- module(liste, [setElement/4,getElement/3,addElement/3,getSize/2]).
+:- module(liste, [getElement/3,setElement/4,addElement/3,getSize/2,sublist/2]).
 	
 /*============================================================================
 				Ajouter Element fin liste
@@ -50,7 +50,25 @@ Algoritme =
 setElement(IndexModif,Liste,Element, NewList):- nth1(IndexModif,Liste,_,ListTmp), 
 												nth1(IndexModif,NewList,Element,ListTmp).
 																			
-									
+/*============================================================================
+					Sous-liste coresspondante
+==============================================================================	
+Retourne Vrai si Liste contient l'element corespondant.
+L'element doit etre une liste 
+
+Paramètres =
+	- Index : Index de l'element.
+	- Liste : Liste à modfier.
+	- Element : Retourne la liste modifier
+Algoritme = 
+	- On supprime la valeur obsolète dans la grille
+	- On ajoute la nouvelle valeur au même index.
+=============================================================================*/
+
+prefix(P,Liste):-append(P,_,Liste).
+sublist(SousListe,Liste):-prefix(SousListe,Liste).
+sublist(SousListe,[_|Queu]):-sublist(SousListe,Queu).
+																			
 /*============================================================================
 					Taille de la liste
 ==============================================================================	

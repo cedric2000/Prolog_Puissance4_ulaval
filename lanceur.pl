@@ -9,25 +9,33 @@ Ensemble de prédicat permettant :
 
 :- use_module(affichage).
 :- use_module(grille).
+:- use_module(liste).
 :- use_module(gameplay).
+:- use_module(fin_jeu).
 
-jouer2P	:- 	emptyGrid(G),
+joue2	:- 	emptyGrid(G),
 			displayGrid(G),
 			displayCoupX(G).
 
-test	:-	grid1(G1),
-			displayGrid(G1),
-			displayCoupX(G1).
+test	:-	grid1(G),
+			isWinner(G,'X').
 
-					
+test1	:-	grid1(G1),
+			isWinner(G1,'O').
+
+test2	:-	grid1(G1),
+			isWinner(G1,'X',6).
+			
+
+
 emptyGrid(G):- G = [[],[],[],[],[],[],[]].
 grid1(G1):- G1 =[	
-					['0','0','0','X','X'],				/*col 1*/
+					['O','O','O','O','X','X'],				/*col 1*/
 					[],									/*col 2*/
 					['X'],								/*col 3*/
-					['0','0','0'],						/*col 4*/
+					['X','O','O'],						/*col 4*/
 					['X','X'],							/*col 5*/
-					[],									/*col 6*/
-					[]		
+					['X'],									/*col 6*/
+					['X']		
 				].
 				
