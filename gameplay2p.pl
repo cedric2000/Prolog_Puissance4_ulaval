@@ -1,18 +1,15 @@
 
 /*###########################################################################
 								GAMEPLAY
-#############################################################################
-Ensemble de prédicat permettant :
-	- 
-#############################################################################*/	
+#############################################################################*/
 
-:- module(gameplay, [jouerCoupX/2, jouerCoupO/2]).
+:- module(gameplay2p, [jouerCoupX/2, jouerCoupO/2]).
 :- use_module(grille).
 :- use_module(liste).
 :- use_module(fin_jeu).
 	
 /*============================================================================
-					Joueur X joue coup 
+					Joueur X réel joue coup 
 ==============================================================================	
 	- Grid : La grille à mettre à jour.
 	- NoColumn : Numero de la colone à mettre à jour
@@ -42,7 +39,7 @@ jouerCoupX(NoColumn,Grid)	:-	getColumn(NoColumn,Grid,Column),
 
 
 /*============================================================================
-					Joueur O joue coup 
+					Joueur O IA joue coup 
 ==============================================================================	
 	- Grid : La grille à mettre à jour.
 	- NoColumn : Numero de la colone à mettre à jour

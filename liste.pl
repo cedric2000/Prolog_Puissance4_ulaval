@@ -41,7 +41,8 @@ getElement(Index,Liste, Element):- nth1(Index,Liste, Element).
 Paramètres =
 	- Index : Index de l'element.
 	- Liste : Liste à modfier.
-	- Element : Retourne la liste modifier
+	- Element : L'élément à inséré dans la liste
+	- NewList : Retourne la liste modifier
 Algoritme = 
 	- On supprime la valeur obsolète dans la grille
 	- On ajoute la nouvelle valeur au même index.
@@ -55,14 +56,6 @@ setElement(IndexModif,Liste,Element, NewList):- nth1(IndexModif,Liste,_,ListTmp)
 ==============================================================================	
 Retourne Vrai si Liste contient l'element corespondant.
 L'element doit etre une liste 
-
-Paramètres =
-	- Index : Index de l'element.
-	- Liste : Liste à modfier.
-	- Element : Retourne la liste modifier
-Algoritme = 
-	- On supprime la valeur obsolète dans la grille
-	- On ajoute la nouvelle valeur au même index.
 =============================================================================*/
 
 prefix(P,Liste):-append(P,_,Liste).

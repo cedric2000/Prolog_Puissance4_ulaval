@@ -10,32 +10,35 @@ Ensemble de prédicat permettant :
 :- use_module(affichage).
 :- use_module(grille).
 :- use_module(liste).
-:- use_module(gameplay).
+:- use_module(gameplay1p).
 :- use_module(fin_jeu).
+:- use_module(fonctionHeuristique).
+:- use_module(ia).
+:- use_module(etat).
+:- use_module(arbre).
 
 joue2	:- 	emptyGrid(G),
 			displayGrid(G),
 			displayCoupX(G).
-
+	
 test	:-	grid1(G),
-			isWinner(G,'X').
-
-test1	:-	grid1(G1),
-			isWinner(G1,'O').
-
-test2	:-	grid1(G1),
-			isWinner(G1,'X',6).
+			displayGrid(G),
+			buidTree(G, State),
+			write('State Finale : '),write(State),write('\n').			
+	
+t(N) :- (N>5 -> write('N>5');
+			   write('N<5')).
 			
-
-
 emptyGrid(G):- G = [[],[],[],[],[],[],[]].
 grid1(G1):- G1 =[	
-					['O','O','O','O','X','X'],				/*col 1*/
-					[],									/*col 2*/
-					['X'],								/*col 3*/
-					['X','O','O'],						/*col 4*/
-					['X','X'],							/*col 5*/
-					['X'],									/*col 6*/
-					['X']		
+					['X','O'],
+					['X','X','X','X','O','O'],
+					['X','X','O'],			
+					['O'],
+					['X','X'],
+					['X','X'],
+					['X']
 				].
+				
+				
 				
