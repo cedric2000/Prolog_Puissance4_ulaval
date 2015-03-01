@@ -6,7 +6,7 @@ Ensemble de prédicat permettant de creer un arbre d'etat
 #############################################################################*/	
 
 
-:- module(arbre, [buidTree/2]).
+:- module(arbre, [buidTree/2,getBestSubstate/3]).
 :- use_module(grille).
 :- use_module(liste).
 :- use_module(etat).
@@ -40,7 +40,9 @@ buidNextStatesMAX(Grid, J, State, Tree,N ) :-
 		N < 7,
 		N1 is N+1,
 		jouerCoup(N1,Grid,NewGrid,J),
-		State2 = [NewGrid,0,N1,J,[]],
+		getValState(NewGrid, J, Valor),
+		write(Valor),write('\n'),
+		State2 = [NewGrid,Valor,N1,J,[]],
 		addSubState(State, State2, NewState),
 		buidNextStatesMAX(Grid, J, NewState, Tree, N1),!.
 	
@@ -112,8 +114,45 @@ jouerCoup(NoColumn,Grid,NewGrid,Joueur):-
 	- NoColumn : Numero de la colone à mettre à jour
 =============================================================================*/												
 
-getBestSubstate(Tree, J, State,7) :- 
+getBestSubstate(Tree, J, BestStateResult) :- 
+		getSubStates(Tree,SubStates),
+		getBestSubstateForX(SubStates,J,0,BestStateResult,0).
+		
+		
+getBestSubstateForX(SubStates, J, BestValorResult,BestStateResult, 7).
+getBestSubstateForX(SubStates, J, BestValorResult,BestStateResult, N) :- 
 		N < 7,
 		N1 is N+1,	
+		write('N1 :'),write(N1),write('\n'),
+		getElement(N1,SubStates,StateCourant),
+		getSubStates(StateCourant,SubStates2),
+		getElement(1,SubStates2,FirstState),
+		
+		getBestSubstateForO(SubStates2, 'O', FirstState, BestSubState,0),
+		write('BestSubState 1 : '),write(BestSubState),write('\n'),
+		getValor(StateCourant,ValeurCourante),
+		getValor(BestSubState,ValeurBestState),
+		ResultCourant is ValeurCourante - ValeurBestState,
+		(ResultCourant>BestValorResult -> 
+			BestStateResult = StateCourant;
+			BestStateResult=BestStateResult
+		),
+		getBestSubstateForX(SubStates, J, BestValorResult,BestStateResult, N1).
+
+getBestSubstateForO(SubStates, J, PreviousBestState, BestState,7) :- BestState = PreviousBestState.
+getBestSubstateForO(SubStates, J, PreviousBestState,BestState,N) :- 
+		N < 7,
+		N1 is N+1,	
+		write('N2 :'),write(N1),write('\n'),
 		getElement(N1,SubStates,State),
-		getGrid(State,Grid).	/*Pas Finis*/							
+		write('Sous State O:'),write(State),write('\n'),
+		getValor(State,ValeurCourante),
+		write('PreviousBestState:'),write(PreviousBestState),write('\n'),
+		getValor(PreviousBestState,ValeurBestState),
+		(ValeurCourante>ValeurBestState -> 
+			PreviousBestState = ValeurCourante;
+			PreviousBestState=PreviousBestState
+		),
+		getBestSubstateForO(SubStates, J, PreviousBestState,BestState,7).
+
+		

@@ -23,21 +23,25 @@ joue2	:- 	emptyGrid(G),
 	
 test	:-	grid1(G),
 			displayGrid(G),
-			buidTree(G, State),
-			write('State Finale : '),write(State),write('\n').			
+			chooseBestMove(G,NoColone),
+			write('NoColone Finale : '),write(NoColone),write('\n').			
 	
-t(N) :- (N>5 -> write('N>5');
-			   write('N<5')).
+test2	:-	grid1(G),
+			displayGrid(G),
+			buidTree2(G, Tree).		
+	
+u(B):- A=5 .
+t(B) :- u(B),write(B).
 			
 emptyGrid(G):- G = [[],[],[],[],[],[],[]].
 grid1(G1):- G1 =[	
-					['X','O'],
-					['X','X','X','X','O','O'],
-					['X','X','O'],			
+					[],
 					['O'],
-					['X','X'],
-					['X','X'],
-					['X']
+					['X','X'],			
+					['O'],
+					['O'],
+					[],
+					[]
 				].
 				
 				
