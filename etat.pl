@@ -29,16 +29,21 @@ Ou :
 					setSubStates/3
 				]).
 :- use_module(etat).	
+:- use_module(liste).
+:- use_module(grille).
 
 
 /*============================================================================
 						Constructeur
 ==============================================================================*/
 
+addSubState(Etat,[],NewEtat) :- NewEtat = Etat.
 addSubState(Etat,SubState,NewEtat) 	:-  getSubStates(Etat,SubStates),
 										append([SubState],SubStates,NewSubStates),
 										setSubStates(Etat,NewSubStates,NewEtat).
+										
 
+										
 /*============================================================================
 						Accesseur
 ==============================================================================*/

@@ -49,7 +49,7 @@ getValState(Grid, J, Valor):- 	getValLines(Grid,J,ValorLine),
 	Parcours de la grille selon les lignes*/	
 getValLines(Grid, J, Valor) :- getValLines(Grid, J, 0, Valor,7).
 
-getValLines(Grid, J, ValorInit,ValorFinal, 0) :- ValorFinal is ValorInit.
+getValLines(_, _, ValorInit,ValorFinal, 0) :- ValorFinal is ValorInit.
 getValLines(Grid, J, ValorInit,ValorFinal, N):- N > 0,
 												N1 is N-1,
 												getLine(N,Grid,Line),
@@ -64,7 +64,7 @@ getValLine(Line, J, Valor):- 	sublist([J,J,J,J], Line),
 												
 	/*Sur la ligne courante : 3 pion succesif, possibilité d'en rajouté 1 à droite*/	
 getValLine(Line, J, Valor):- 	sublist([J,J,J,[]], Line),
-								Valor = 500, !.						.	
+								Valor = 500, !.						
 
 	/*Sur la ligne courante : 3 pion succesif, possibilité d'en rajouté 1 à gauche*/												
 getValLine(Line, J, Valor)	:- 	sublist([[],J,J,J], Line),
@@ -73,7 +73,7 @@ getValLine(Line, J, Valor)	:- 	sublist([[],J,J,J], Line),
 												
 	/*Sur la ligne courante : 2 pion succesif, possibilité d'en rajouté 2 à droite*/	
 getValLine(Line, J, Valor)	:- 	sublist([J,J,[],[]], Line),
-								Valor = 200, !.												.	
+								Valor = 200, !.												
 
 	/*Sur la ligne courante : 2 pion succesif, possibilité d'en rajouté 2 à gauche*/												
 getValLine(Line, J, Valor)	:- 	sublist([[],[],J,J], Line),
@@ -86,7 +86,7 @@ getValLine(Line, J, Valor)	:- 	sublist([[],J,J,[]], Line),
 getValLine(Line, J, Valor)	:- 	sublist([[],J,J,[],J], Line),
 								Valor = 200,!.
 								
-getValLine(Line, J, 0).	
+getValLine(_, _, 0).	
 									
 /*============================================================================
 			Détermine la valeur Heuristique sur les colonnes
@@ -101,7 +101,7 @@ getValLine(Line, J, 0).
 	Parcours de la grille selon les colonne*/	
 getValColumns(Grid, J, Valor) :- getValColumns(Grid, J, 0, Valor,7).
 
-getValColumns(Grid, J, ValorInit,ValorFinal, 0) :- ValorFinal is ValorInit.
+getValColumns(_, _, ValorInit,ValorFinal, 0) :- ValorFinal is ValorInit.
 getValColumns(Grid, J, ValorInit,ValorFinal, N)	:-  N > 0,
 													N1 is N-1,
 													getColumn(N,Grid,Column),
@@ -137,4 +137,4 @@ getValColumn(Column, 'O', Valor):- 	sublist(['O','O'], Column),
 									not(sublist(['O','O','X'], Column)),
 									Valor = 200,!.					
 
-getValColumn(Column, J, 0).	
+getValColumn(_, _, 0).	

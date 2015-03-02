@@ -18,7 +18,7 @@ Ensemble de prédicat permettant de géré une liste :
 	- NewList : Liste mise à jour.
 =============================================================================*/
 
-addElement(List,Element, NewList) 	:- 	getSize(Liste, N), 
+addElement(List,Element, NewList) 	:- 	getSize(List, N), 
 										N<7,
 										append(List,[Element], NewList). 
 

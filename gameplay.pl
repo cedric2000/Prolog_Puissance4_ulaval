@@ -3,13 +3,13 @@
 								GAMEPLAY
 #############################################################################*/
 
-:- module(gameplay2p, [jouerCoupX/2, jouerCoupO/2]).
+:- module(gameplay, [jouerCoupX/2, jouerCoupO/2]).
 :- use_module(grille).
 :- use_module(liste).
 :- use_module(fin_jeu).
 	
 /*============================================================================
-					Joueur X réel joue coup 
+					Joueur X joue coup 
 ==============================================================================	
 	- Grid : La grille à mettre à jour.
 	- NoColumn : Numero de la colone à mettre à jour
@@ -39,7 +39,7 @@ jouerCoupX(NoColumn,Grid)	:-	getColumn(NoColumn,Grid,Column),
 
 
 /*============================================================================
-					Joueur O IA joue coup 
+					Joueur O joue coup 
 ==============================================================================	
 	- Grid : La grille à mettre à jour.
 	- NoColumn : Numero de la colone à mettre à jour
